@@ -1,8 +1,9 @@
 package com.github.quantakt.moeplayer
 
+import com.github.quantakt.moeplayer.data.service.animethemesapi.AnimeThemesApi
+import com.github.quantakt.moeplayer.data.service.animethemesapi.models.GlobalSearch
 import com.github.quantakt.moeplayer.data.service.animethemesapi.models.resources.Anime
 import com.github.quantakt.moeplayer.data.service.animethemesapi.models.resources.AnimeTheme
-import com.github.quantakt.moeplayer.data.service.animethemesapi.AnimeThemesApi
 import com.github.quantakt.moeplayer.di.NetworkModule
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -18,6 +19,7 @@ class AnimeThemesApiTest {
 
         api.globalSearch(
             query = "a",
+            fields = listOf(GlobalSearch.Fields.Anime, GlobalSearch.Fields.AnimeThemes),
             animeIncludes = listOf(
                 Anime.Include.animethemes_animethemeentries_videos,
                 Anime.Include.animethemes_animethemeentries_videos_audio,
