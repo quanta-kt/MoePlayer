@@ -1,4 +1,4 @@
-package com.github.quantakt.moeplayer.data.service.animethemesapi
+package com.github.quantakt.moeplayer.data.service.animethemesapi.models.resources
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

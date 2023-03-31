@@ -1,5 +1,8 @@
 package com.github.quantakt.moeplayer.data.service.animethemesapi
 
+import com.github.quantakt.moeplayer.data.service.animethemesapi.models.GlobalSearchResult
+import com.github.quantakt.moeplayer.data.service.animethemesapi.models.resources.Anime
+import com.github.quantakt.moeplayer.data.service.animethemesapi.models.resources.AnimeTheme
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*

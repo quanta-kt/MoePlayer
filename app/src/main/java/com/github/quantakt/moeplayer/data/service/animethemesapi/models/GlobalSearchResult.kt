@@ -1,5 +1,7 @@
-package com.github.quantakt.moeplayer.data.service.animethemesapi
+package com.github.quantakt.moeplayer.data.service.animethemesapi.models
 
+import com.github.quantakt.moeplayer.data.service.animethemesapi.models.resources.Anime
+import com.github.quantakt.moeplayer.data.service.animethemesapi.models.resources.AnimeTheme
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
