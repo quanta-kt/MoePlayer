@@ -21,7 +21,10 @@ object NetworkModule {
     fun provideKtorClient(): HttpClient {
         return HttpClient(CIO) {
             install(ContentNegotiation) {
-                json()
+                json(Json {
+                    coerceInputValues = true
+                    ignoreUnknownKeys = true
+                })
             }
 
             install(Logging) {
