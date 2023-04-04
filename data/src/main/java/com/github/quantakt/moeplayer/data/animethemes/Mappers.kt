@@ -1,7 +1,7 @@
 package com.github.quantakt.moeplayer.data.animethemes
 
 import com.github.quantakt.moeplayer.api.models.GlobalSearch
-import com.github.quantakt.moeplayer.domain.models.SearchResult
+import com.github.quantakt.moeplayer.model.SearchResult
 
 private const val AUDIO_URL_FORMAT = "https://a.animethemes.moe/%s.ogg"
 
@@ -32,7 +32,7 @@ internal fun GlobalSearch.Result.Search.toExternalModel(): SearchResult {
                     title = animeTheme.song?.title ?: "",
                     animeTitle = animeTheme.anime?.name ?: "",
                     imageUrl = animeTheme.anime?.images?.firstOrNull()?.link,
-                    audioUrl =  AUDIO_URL_FORMAT.format(filename)
+                    audioUrl = AUDIO_URL_FORMAT.format(filename)
                 )
             }.filterNotNull()
     )

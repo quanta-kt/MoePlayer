@@ -1,6 +1,6 @@
 [versions]
 androidx-core-ktx = "1.9.0"
-androidx-lifecycle-runtime-ktx = "2.6.1"
+androidx-lifecycle = "2.6.1"
 
 compose = "1.4.0"
 compose-activity = "1.7.0"
@@ -17,7 +17,7 @@ espresso = "3.5.1"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx" }
-androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle-runtime-ktx" }
+androidx-lifecycleViewmodelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }

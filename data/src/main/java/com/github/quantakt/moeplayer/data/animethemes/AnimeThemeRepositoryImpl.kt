@@ -4,7 +4,7 @@ import com.github.quantakt.moeplayer.api.AnimeThemesApi
 import com.github.quantakt.moeplayer.api.models.GlobalSearch
 import com.github.quantakt.moeplayer.api.models.resources.Anime
 import com.github.quantakt.moeplayer.api.models.resources.AnimeTheme
-import com.github.quantakt.moeplayer.domain.models.SearchResult
+import com.github.quantakt.moeplayer.model.SearchResult
 import javax.inject.Inject
 import javax.inject.Singleton
 

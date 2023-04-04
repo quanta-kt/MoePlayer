@@ -1,16 +1,15 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace = "com.github.quantakt.moeplayer.domain"
+    namespace = "com.github.quantakt.moeplayer.model"
     compileSdk = 33
 
     defaultConfig {
         minSdk = 24
+        targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -32,12 +31,4 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
-
-dependencies {
-    implementation(project(":data"))
-    implementation(project(":model"))
-
-    implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
 }

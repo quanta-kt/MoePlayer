@@ -1,4 +1,4 @@
-package com.github.quantakt.moeplayer.domain.models
+package com.github.quantakt.moeplayer.model
 
 data class SearchResult(
     val anime: List<Anime>,

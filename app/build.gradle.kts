@@ -49,11 +49,13 @@ android {
 }
 
 dependencies {
+    implementation(project(":features:home"))
+
     implementation(project(":domain"))
     implementation(project(":data"))
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycleViewmodelCompose)
 
     implementation(libs.compose.ui)
     implementation(libs.compose.activity)
