@@ -14,8 +14,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Moe Player"
 include ':app'
-include ':api'
-include ':data'
-include ':domain'
+include ':core:api'
+include ':core:data'
+include ':core:domain'
+include ':core:model'
 include ':features:home'
-include ':model'

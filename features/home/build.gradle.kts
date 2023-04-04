@@ -42,9 +42,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":data"))
-    implementation(project(":model"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycleViewmodelCompose)

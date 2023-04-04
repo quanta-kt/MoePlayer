@@ -51,8 +51,8 @@ android {
 dependencies {
     implementation(project(":features:home"))
 
-    implementation(project(":domain"))
-    implementation(project(":data"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycleViewmodelCompose)
