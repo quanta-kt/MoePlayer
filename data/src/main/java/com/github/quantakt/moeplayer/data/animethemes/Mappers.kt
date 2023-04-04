@@ -13,7 +13,7 @@ internal fun GlobalSearch.Result.Search.toExternalModel(): SearchResult {
                 slug = it.slug,
                 title = it.name,
                 imageUrl = it.images?.firstOrNull()?.link,
-                synopsis = it.synopsis,
+                synopsis = it.synopsis.orEmpty(),
             )
         },
         animeThemes = animeThemes.orEmpty()

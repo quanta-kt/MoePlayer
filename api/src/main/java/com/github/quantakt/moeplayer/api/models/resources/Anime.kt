@@ -10,7 +10,7 @@ data class Anime(
     val slug: String,
     val year: Int,
     val season: String,
-    val synopsis: String,
+    val synopsis: String? = null,
     @SerialName("created_at")
     val createdAt: String,
     @SerialName("updated_at")
