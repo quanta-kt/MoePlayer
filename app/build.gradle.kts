@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
 }
 
 android {
@@ -50,20 +49,27 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.bundles.compose)
+
+    implementation(libs.compose.ui)
+    implementation(libs.compose.activity)
+    implementation(libs.compose.material3)
+    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.tooling.preview)
+    androidTestImplementation(libs.compose.ui.test.junit4)
+    debugImplementation(libs.compose.ui.test.manifest)
+
 
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
 
-    implementation(libs.bundles.ktor.client)
-
-    implementation(libs.kotlinx.serialization.json)
-
-    implementation(libs.junit)
-    implementation(libs.androidx.junit.ext)
-    implementation(libs.espresso)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit.ext)
+    androidTestImplementation(libs.espresso)
 }
 
 // Allow references to generated code

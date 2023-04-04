@@ -23,8 +23,8 @@ compose-activity = { module = "androidx.activity:activity-compose", version.ref 
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-comppose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-junit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
@@ -48,14 +48,4 @@ ktor-client = [
     "ktor-client-logging",
     "ktor-client-content-negotiation",
     "ktor-serialization-kotlinx-json",
-]
-
-compose = [
-    "compose-activity",
-    "compose-ui",
-    "compose-material3",
-    "compose-ui-tooling-preview",
-    "comppose-ui-tooling",
-    "compose-junit",
-    "compose-ui-test-manifest",
 ]
