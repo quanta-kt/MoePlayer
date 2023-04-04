@@ -1,5 +1,8 @@
 package com.github.quantakt.moeplayer.di
 
+import com.github.quantakt.moeplayer.data.repository.animethemes.AnimeThemeRepositoryImpl
+import com.github.quantakt.moeplayer.domain.repository.AnimeThemeRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,21 +18,28 @@ import kotlinx.serialization.json.Json
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+abstract class NetworkModule {
 
-    @Provides
-    fun provideKtorClient(): HttpClient {
-        return HttpClient(CIO) {
-            install(ContentNegotiation) {
-                json(Json {
-                    coerceInputValues = true
-                    ignoreUnknownKeys = true
-                })
-            }
+    @Binds
+    abstract fun bindAnimeThemeRepository(
+        animeThemeRepositoryImpl: AnimeThemeRepositoryImpl
+    ): AnimeThemeRepository
 
-            install(Logging) {
-                level = LogLevel.ALL
-                logger = Logger.ANDROID
+    companion object {
+        @Provides
+        fun provideKtorClient(): HttpClient {
+            return HttpClient(CIO) {
+                install(ContentNegotiation) {
+                    json(Json {
+                        coerceInputValues = true
+                        ignoreUnknownKeys = true
+                    })
+                }
+
+                install(Logging) {
+                    level = LogLevel.ALL
+                    logger = Logger.ANDROID
+                }
             }
         }
     }
