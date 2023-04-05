@@ -34,8 +34,10 @@ internal fun SearchItem(
                 AsyncImage(
                     model = imageUrl,
                     contentDescription = null,
-                    modifier = Modifier.fillMaxHeight(),
-                    contentScale = ContentScale.FillHeight
+                    modifier = Modifier
+                        .aspectRatio(0.702f)
+                        .fillMaxHeight(),
+                    contentScale = ContentScale.Crop
                 )
             }
 
