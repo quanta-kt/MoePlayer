@@ -4,8 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -58,7 +56,9 @@ fun Home(
                     SearchItem(
                         modifier = Modifier.fillMaxWidth(),
                         title = anime.title,
-                        onClick = { /* TODO */ }
+                        subtitle = "Anime • ${anime.season} ${anime.year}",
+                        onClick = { /* TODO */ },
+                        imageUrl = anime.imageUrl,
                     )
                 }
 
@@ -70,30 +70,12 @@ fun Home(
                     SearchItem(
                         modifier = Modifier.fillMaxWidth(),
                         title = animeTheme.title,
-                        onClick = { /* TODO */ }
+                        subtitle = "Theme • ${animeTheme.type}${animeTheme.sequence} • ${animeTheme.animeTitle}",
+                        onClick = { /* TODO */ },
+                        imageUrl = animeTheme.imageUrl,
                     )
                 }
             }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun SearchItem(
-    modifier: Modifier = Modifier,
-    title: String,
-    onClick: () -> Unit,
-) {
-    Card(
-        modifier = modifier,
-        onClick = onClick,
-    ) {
-
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(title)
         }
     }
 }

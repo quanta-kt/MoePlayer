@@ -6,6 +6,8 @@ compose = "1.4.0"
 compose-activity = "1.7.0"
 compose-material3 = "1.1.0-beta01"
 
+coil = "2.3.0"
+
 ktor = "2.2.4"
 kotlinx-serialization-json = "1.4.1"
 
@@ -26,6 +28,8 @@ compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview"
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
+
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }

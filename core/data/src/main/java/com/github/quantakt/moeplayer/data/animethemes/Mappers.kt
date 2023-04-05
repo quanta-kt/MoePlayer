@@ -10,10 +10,11 @@ internal fun GlobalSearch.Result.Search.toExternalModel(): SearchResult {
         anime = anime.orEmpty().map {
             SearchResult.Anime(
                 id = it.id,
-                slug = it.slug,
                 title = it.name,
                 imageUrl = it.images?.firstOrNull()?.link,
                 synopsis = it.synopsis.orEmpty(),
+                season = it.season,
+                year = it.year,
             )
         },
         animeThemes = animeThemes.orEmpty()
@@ -28,11 +29,12 @@ internal fun GlobalSearch.Result.Search.toExternalModel(): SearchResult {
 
                 SearchResult.AnimeTheme(
                     id = animeTheme.id,
-                    slug = animeTheme.slug,
                     title = animeTheme.song?.title ?: "",
                     animeTitle = animeTheme.anime?.name ?: "",
                     imageUrl = animeTheme.anime?.images?.firstOrNull()?.link,
-                    audioUrl = AUDIO_URL_FORMAT.format(filename)
+                    audioUrl = AUDIO_URL_FORMAT.format(filename),
+                    type = animeTheme.type,
+                    sequence = animeTheme.sequence,
                 )
             }.filterNotNull()
     )
