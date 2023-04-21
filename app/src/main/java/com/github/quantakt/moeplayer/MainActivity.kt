@@ -3,8 +3,12 @@ package com.github.quantakt.moeplayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -40,7 +44,27 @@ class MainActivity : ComponentActivity() {
 private fun App() {
     Scaffold(
         bottomBar = {
-            MediaPlayerView()
+            Column {
+                MediaPlayerView()
+
+                NavigationBar {
+                    NavigationBarItem(
+                        selected = true,
+                        onClick = {},
+                        icon = {
+                            Icon(Icons.Default.Home, contentDescription = null)
+                        }
+                    )
+
+                    NavigationBarItem(
+                        selected = false,
+                        onClick = {},
+                        icon = {
+                            Icon(Icons.Default.List, contentDescription = null)
+                        }
+                    )
+                }
+            }
         }
     ) {
         Home(modifier = Modifier.padding(it))
