@@ -24,21 +24,6 @@ internal fun SearchResults(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = contentPadding,
     ) {
-        item {
-            if (!result?.anime.isNullOrEmpty()) {
-                Text("Anime")
-            }
-        }
-
-        items(result?.anime.orEmpty(), key = { it.id }) { anime ->
-            SearchItem(
-                modifier = Modifier.fillMaxWidth(),
-                title = anime.title,
-                subtitle = "Anime • ${anime.season} ${anime.year}",
-                onClick = { /* TODO */ },
-                imageUrl = anime.imageUrl,
-            )
-        }
 
         item {
             if (!result?.animeThemes.isNullOrEmpty()) {
@@ -53,6 +38,22 @@ internal fun SearchResults(
                 subtitle = "Theme • ${animeTheme.type}${animeTheme.sequence} • ${animeTheme.animeTitle}",
                 onClick = { playTrack(animeTheme) },
                 imageUrl = animeTheme.imageUrl,
+            )
+        }
+
+        item {
+            if (!result?.anime.isNullOrEmpty()) {
+                Text("Anime")
+            }
+        }
+
+        items(result?.anime.orEmpty(), key = { it.id }) { anime ->
+            SearchItem(
+                modifier = Modifier.fillMaxWidth(),
+                title = anime.title,
+                subtitle = "Anime • ${anime.season} ${anime.year}",
+                onClick = { /* TODO */ },
+                imageUrl = anime.imageUrl,
             )
         }
     }
