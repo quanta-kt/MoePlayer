@@ -1,12 +1,25 @@
 package com.github.quantakt.moeplayer.ui.player
 
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.github.quantakt.moeplayer.player.MediaPlayer
+import com.github.quantakt.moeplayer.player.PlayableMedia
+import com.github.quantakt.moeplayer.ui.R
+import com.github.quantakt.moeplayer.ui.theme.MoePlayerTheme
 
 val LocalMediaPlayer = staticCompositionLocalOf<MediaPlayer> {
     error("CompositionLocal LocalMediaPlayer is not present")
@@ -18,20 +31,121 @@ fun MediaPlayerView(
 ) {
     val player = LocalMediaPlayer.current
     val playerState by player.playerStateFlow.collectAsState()
-    val progressState by player.progressStateFlow.collectAsState()
 
-    // TODO: Implement player view
+    val showPlayer by remember {
+        derivedStateOf {
+            playerState.currentTrack != null
+        }
+    }
 
-    val message = """
-        |Progress: ${progressState.playbackProgress}
-        |Buffered: ${progressState.bufferedProgress}
-        |
-        |$playerState
-        |""".trimMargin()
+    AnimatedVisibility(
+        visible = showPlayer,
+        enter = slideInVertically { it },
+        exit = slideOutVertically { it },
+    ) {
+        MediaPlayerView(
+            modifier = modifier,
+            playerState = playerState,
+            togglePlay = { player.playWhenReady(!playerState.playing) }
+        )
+    }
+}
 
-    Text(
+@Composable
+private fun MediaPlayerView(
+    modifier: Modifier = Modifier,
+    playerState: MediaPlayer.PlayerState,
+    togglePlay: () -> Unit,
+) {
+
+    Surface(
         modifier = Modifier
+            .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
             .then(modifier),
-        text = message,
-    )
+        color = MaterialTheme.colorScheme.primaryContainer,
+    ) {
+        Row(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+            AsyncImage(
+                modifier = Modifier
+                    .size(48.dp)
+                    .clip(RoundedCornerShape(8.dp)),
+                model = playerState.currentTrack?.artUrl,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+            )
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Column(
+                modifier = Modifier.weight(1f),
+            ) {
+                Text(
+                    text = playerState.currentTrack?.title ?: "",
+                    style = MaterialTheme.typography.bodyLarge,
+                    maxLines = 1,
+                )
+                Spacer(
+                    Modifier.height(8.dp)
+                )
+                Text(
+                    text = playerState.currentTrack?.animeTitle ?: "",
+                    style = MaterialTheme.typography.bodySmall,
+                    maxLines = 1,
+                )
+            }
+
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(
+                    modifier = Modifier.padding(12.dp),
+                    painter = painterResource(id = R.drawable.ic_player_previous),
+                    contentDescription = null
+                )
+            }
+
+            IconButton(
+                modifier = Modifier.size(48.dp),
+                onClick = togglePlay,
+            ) {
+                Icon(
+                    imageVector = Icons.Default.PlayArrow,
+                    contentDescription = null
+                )
+            }
+
+            IconButton(
+                onClick = {},
+            ) {
+                Icon(
+                    modifier = Modifier.padding(12.dp),
+                    painter = painterResource(id = R.drawable.ic_player_next),
+                    contentDescription = null
+                )
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun PlayerPreview() {
+    MoePlayerTheme {
+        MediaPlayerView(
+            modifier = Modifier.fillMaxWidth(),
+            playerState = MediaPlayer.PlayerState(
+                buffering = false,
+                currentTrack = PlayableMedia(
+                    title = "ふわふわ時間",
+                    animeTitle = "K-On",
+                    streamUrl = "",
+                    artUrl = null
+                ),
+                100,
+                true,
+                null,
+            ),
+            togglePlay = {}
+        )
+    }
 }

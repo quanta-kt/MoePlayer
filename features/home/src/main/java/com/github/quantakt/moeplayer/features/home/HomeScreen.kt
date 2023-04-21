@@ -17,6 +17,7 @@ import com.github.quantakt.moeplayer.ui.player.LocalMediaPlayer
 
 @Composable
 fun Home(
+    modifier: Modifier,
     viewModel: HomeViewModel = viewModel()
 ) {
 
@@ -31,7 +32,7 @@ fun Home(
     val player = LocalMediaPlayer.current
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().then(modifier),
     ) {
 
         Spacer(Modifier.height(16.dp))
@@ -75,8 +76,10 @@ fun Home(
                 playTrack = {
                     player.play(
                         PlayableMedia(
-                            it.audioUrl,
+                            streamUrl = it.audioUrl,
                             artUrl = it.imageUrl,
+                            title = it.title,
+                            animeTitle = it.animeTitle,
                         )
                     )
                 }

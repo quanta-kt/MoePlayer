@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.github.quantakt.moeplayer.ui.player.MediaPlayerView
 
 @Composable
 internal fun MainContent(modifier: Modifier = Modifier, contentPadding: PaddingValues) {
@@ -24,10 +23,6 @@ internal fun MainContent(modifier: Modifier = Modifier, contentPadding: PaddingV
     ) {
         header()
         recentUploads()
-
-        item {
-            MediaPlayerView(modifier = Modifier.fillMaxWidth())
-        }
     }
 }
 

@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.activity)
     implementation(libs.compose.material3)
+    implementation(libs.coil)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.tooling.preview)
 }
