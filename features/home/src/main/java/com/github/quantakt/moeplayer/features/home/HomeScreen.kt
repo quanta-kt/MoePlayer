@@ -12,6 +12,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.github.quantakt.moeplayer.player.PlayableMedia
+import com.github.quantakt.moeplayer.ui.player.LocalMediaPlayer
 
 @Composable
 fun Home(
@@ -25,6 +27,8 @@ fun Home(
             state.query.isNotBlank()
         }
     }
+
+    val player = LocalMediaPlayer.current
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -65,7 +69,18 @@ fun Home(
         }
 
         AnimatedVisibility(hasQuery) {
-            SearchResults(result = state.results, contentPadding = PaddingValues(16.dp))
+            SearchResults(
+                result = state.results,
+                contentPadding = PaddingValues(16.dp),
+                playTrack = {
+                    player.play(
+                        PlayableMedia(
+                            it.audioUrl,
+                            artUrl = it.imageUrl,
+                        )
+                    )
+                }
+            )
         }
     }
 }

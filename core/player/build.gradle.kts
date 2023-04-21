@@ -1,10 +1,13 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace = "com.github.quantakt.moeplayer.ui"
+    namespace = "com.github.quantakt.moeplayer.player"
     compileSdk = 33
 
     defaultConfig {
@@ -30,20 +33,20 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
-    }
 }
 
 dependencies {
-    implementation(project(":core:player"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
 
-    implementation(libs.compose.ui)
-    implementation(libs.compose.activity)
-    implementation(libs.compose.material3)
-    debugImplementation(libs.compose.ui.tooling)
-    debugImplementation(libs.compose.ui.tooling.preview)
+    implementation(libs.androidx.core.ktx)
+
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit.ext)
+
+    implementation(libs.exoplayer)
 }

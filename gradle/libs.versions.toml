@@ -8,6 +8,8 @@ compose-material3 = "1.1.0-beta01"
 
 coil = "2.3.0"
 
+exoplayer = "2.18.5"
+
 ktor = "2.2.4"
 kotlinx-serialization-json = "1.4.1"
 
@@ -30,6 +32,8 @@ compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", versio
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+exoplayer = { module = "com.google.android.exoplayer:exoplayer-core", version.ref = "exoplayer" }
 
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }

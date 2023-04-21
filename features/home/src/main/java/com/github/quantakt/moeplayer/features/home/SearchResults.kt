@@ -16,6 +16,7 @@ import com.github.quantakt.moeplayer.model.SearchResult
 internal fun SearchResults(
     result: SearchResult?,
     contentPadding: PaddingValues,
+    playTrack: (theme: SearchResult.AnimeTheme) -> Unit,
 ) {
 
     LazyColumn(
@@ -50,7 +51,7 @@ internal fun SearchResults(
                 modifier = Modifier.fillMaxWidth(),
                 title = animeTheme.title,
                 subtitle = "Theme • ${animeTheme.type}${animeTheme.sequence} • ${animeTheme.animeTitle}",
-                onClick = { /* TODO */ },
+                onClick = { playTrack(animeTheme) },
                 imageUrl = animeTheme.imageUrl,
             )
         }

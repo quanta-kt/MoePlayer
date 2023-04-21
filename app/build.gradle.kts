@@ -55,6 +55,8 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
 
+    implementation(project(":core:player"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycleViewmodelCompose)
 
