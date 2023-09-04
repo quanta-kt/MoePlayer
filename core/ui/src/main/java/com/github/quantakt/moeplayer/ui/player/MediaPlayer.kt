@@ -3,6 +3,7 @@ package com.github.quantakt.moeplayer.ui.player
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -153,34 +154,11 @@ private fun ProgressBar(
     progress: Float,
     bufferProgress: Float,
 ) {
-    Layout(
-        modifier = modifier,
-        content = {
-            Box(modifier = Modifier.background(progressColor))
-            Box(modifier = Modifier.background(bufferProgressColor))
-        }
-    ) { measurables, constraints ->
-
-        val progressBarWidth = (constraints.maxWidth * progress).roundToInt()
-        val progressBarPlaceable = measurables.first().measure(
-            constraints.copy(
-                minWidth = progressBarWidth,
-                maxWidth = progressBarWidth
-            )
-        )
-
-        val bufferProgressBarWidth = (constraints.maxWidth * bufferProgress).roundToInt()
-        val bufferProgressBarPlaceable = measurables.last().measure(
-            constraints.copy(
-                minWidth = bufferProgressBarWidth,
-                maxWidth = bufferProgressBarWidth
-            )
-        )
-
-        layout(constraints.maxWidth, constraints.maxHeight) {
-            bufferProgressBarPlaceable.place(0, 0)
-            progressBarPlaceable.place(0, 0)
-        }
+    Canvas(
+        modifier = modifier
+    ) {
+        drawRect(color = bufferProgressColor, size = size.copy(width = size.height * bufferProgress))
+        drawRect(color = progressColor, size = size.copy(width = size.width * progress))
     }
 }
 
