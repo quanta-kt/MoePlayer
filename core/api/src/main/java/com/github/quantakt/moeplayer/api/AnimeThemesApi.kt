@@ -1,37 +1,16 @@
 package com.github.quantakt.moeplayer.api
 
-import com.github.quantakt.moeplayer.api.models.GlobalSearch
-import com.github.quantakt.moeplayer.api.models.resources.Anime
-import com.github.quantakt.moeplayer.api.models.resources.AnimeTheme
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
+import io.ktor.client.HttpClient
 import javax.inject.Inject
-
 
 class AnimeThemesApi @Inject constructor(
     private val httpClient: HttpClient
 ) {
-    suspend fun globalSearch(
-        query: String,
-        fields: List<GlobalSearch.Fields> = emptyList(),
-        animeIncludes: List<Anime.Include> = emptyList(),
-        animeThemeIncludes: List<AnimeTheme.Include> = emptyList(),
-    ): GlobalSearch.Result {
 
-        return httpClient.get("https://api.animethemes.moe/search") {
-
-            parameter("include[anime]", animeIncludes.joinToString(",") { it.apiName })
-
-            parameter(
-                "include[animetheme]",
-                animeThemeIncludes.joinToString(",") { it.apiName }
-            )
-
-            parameter("fields[search]", fields.joinToString(",") { it.apiName })
-
-            parameter("q", query)
-
-        }.body()
+    companion object {
+        val BASE_URL = "https://api.animethemes.moe"
     }
+
+    val globalSearch = GlobalSearch(httpClient)
+    val videos = Videos(httpClient)
 }

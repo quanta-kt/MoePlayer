@@ -18,8 +18,13 @@ data class SearchResult(
         val title: String,
         val animeTitle: String,
         val imageUrl: String?,
-        val audioUrl: String,
         val type: String?,
         val sequence: Int?,
+        val video: Video,
+    )
+
+    data class Video(
+        val basename: String,
+        val url: String,
     )
 }

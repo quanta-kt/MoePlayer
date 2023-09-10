@@ -1,11 +1,9 @@
 package com.github.quantakt.moeplayer.data.animethemes
 
-import com.github.quantakt.moeplayer.api.models.GlobalSearch
+import com.github.quantakt.moeplayer.api.models.resources.Search
 import com.github.quantakt.moeplayer.model.SearchResult
 
-private const val AUDIO_URL_FORMAT = "https://a.animethemes.moe/%s.ogg"
-
-internal fun GlobalSearch.Result.Search.toExternalModel(): SearchResult {
+internal fun Search.toExternalModel(): SearchResult {
     return SearchResult(
         anime = anime.orEmpty().map {
             SearchResult.Anime(
@@ -17,25 +15,25 @@ internal fun GlobalSearch.Result.Search.toExternalModel(): SearchResult {
                 year = it.year,
             )
         },
-        animeThemes = animeThemes.orEmpty()
-            .asIterable()
-            .map { animeTheme ->
+        animeThemes = animeThemes.orEmpty().mapNotNull { animeTheme ->
 
-                val filename = animeTheme.animeThemeEntries
-                    ?.firstOrNull()
-                    ?.videos
-                    ?.firstOrNull()
-                    ?.filename ?: return@map null
+            val video = animeTheme.animeThemeEntries?.firstOrNull()?.videos?.firstOrNull()
+                ?: return@mapNotNull null
 
-                SearchResult.AnimeTheme(
-                    id = animeTheme.id,
-                    title = animeTheme.song?.title ?: "",
-                    animeTitle = animeTheme.anime?.name ?: "",
-                    imageUrl = animeTheme.anime?.images?.firstOrNull()?.link,
-                    audioUrl = AUDIO_URL_FORMAT.format(filename),
-                    type = animeTheme.type,
-                    sequence = animeTheme.sequence,
-                )
-            }.filterNotNull()
+            SearchResult.AnimeTheme(
+                id = animeTheme.id,
+                title = animeTheme.song?.title ?: "",
+                animeTitle = animeTheme.anime?.name ?: "",
+                imageUrl = animeTheme.anime?.images?.firstOrNull()?.link,
+                type = animeTheme.type,
+                sequence = animeTheme.sequence,
+                video = SearchResult.Video(
+                    basename = video.basename,
+                    url = video.link
+                        // FIXME: Should we make the source field non-null?
+                        ?: return@mapNotNull null
+                ),
+            )
+        }
     )
 }

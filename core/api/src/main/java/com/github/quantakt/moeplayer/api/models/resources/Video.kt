@@ -30,4 +30,11 @@ data class Video(
 
     // relations
     val audio: Audio? = null,
-)
+) {
+
+    enum class Include(
+        val apiName: String
+    ) {
+        audio("audio")
+    }
+}

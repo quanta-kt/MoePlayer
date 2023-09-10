@@ -12,8 +12,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.github.quantakt.moeplayer.model.SearchResult
 import com.github.quantakt.moeplayer.player.PlayableMedia
 import com.github.quantakt.moeplayer.ui.player.LocalMediaPlayer
+import kotlinx.coroutines.launch
 
 @Composable
 fun Home(
@@ -23,16 +25,49 @@ fun Home(
 
     val state by viewModel.state.collectAsState()
 
+    val player = LocalMediaPlayer.current
+
+    val scope = rememberCoroutineScope()
+
+    Home(
+        modifier = modifier,
+        state = state,
+        setSearchQuery = viewModel::setSearchQuery,
+        playTrack = { animeTheme ->
+            scope.launch {
+                val streamUrl = viewModel.getAudioUrl(animeTheme)
+
+                player.play(
+                    PlayableMedia(
+                        streamUrl = streamUrl,
+                        artUrl = animeTheme.imageUrl,
+                        title = animeTheme.title,
+                        animeTitle = animeTheme.animeTitle,
+                    )
+                )
+            }
+        }
+    )
+}
+
+@Composable
+private fun Home(
+    modifier: Modifier,
+    state: HomeScreenState,
+    setSearchQuery: (query: String) -> Unit,
+    playTrack: (theme: SearchResult.AnimeTheme) -> Unit,
+) {
+
     val hasQuery by remember(state.results) {
         derivedStateOf {
             state.query.isNotBlank()
         }
     }
 
-    val player = LocalMediaPlayer.current
-
     Column(
-        modifier = Modifier.fillMaxSize().then(modifier),
+        modifier = Modifier
+            .fillMaxSize()
+            .then(modifier),
     ) {
 
         Spacer(Modifier.height(16.dp))
@@ -42,7 +77,7 @@ fun Home(
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth(),
             query = state.query,
-            onQueryChange = viewModel::setSearchQuery,
+            onQueryChange = setSearchQuery,
             onSearch = {},
             active = false,
             onActiveChange = {},
@@ -55,7 +90,7 @@ fun Home(
             },
             trailingIcon = {
                 if (hasQuery) {
-                    IconButton(onClick = { viewModel.setSearchQuery("") }) {
+                    IconButton(onClick = { setSearchQuery("") }) {
                         Icon(
                             imageVector = Icons.Default.Close,
                             contentDescription = null,
@@ -73,16 +108,7 @@ fun Home(
             SearchResults(
                 result = state.results,
                 contentPadding = PaddingValues(16.dp),
-                playTrack = {
-                    player.play(
-                        PlayableMedia(
-                            streamUrl = it.audioUrl,
-                            artUrl = it.imageUrl,
-                            title = it.title,
-                            animeTitle = it.animeTitle,
-                        )
-                    )
-                }
+                playTrack = playTrack
             )
         }
     }

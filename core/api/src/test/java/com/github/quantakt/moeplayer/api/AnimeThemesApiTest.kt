@@ -1,8 +1,9 @@
 package com.github.quantakt.moeplayer.api
 
-import com.github.quantakt.moeplayer.api.models.GlobalSearch
 import com.github.quantakt.moeplayer.api.models.resources.Anime
 import com.github.quantakt.moeplayer.api.models.resources.AnimeTheme
+import com.github.quantakt.moeplayer.api.models.resources.Search
+import com.github.quantakt.moeplayer.api.models.resources.Video
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -28,18 +29,18 @@ class AnimeThemesApiTest {
         }
     }
 
+    private val api = AnimeThemesApi(httpClient)
+
     /**
      * Test that we can parse the JSON objects returned by the API with our models
      */
     @Test
     fun searchApiCompatibleWithModels(): Unit = runBlocking {
-        val api = AnimeThemesApi(httpClient)
-
-        val globalSearch = api.globalSearch(
-            query = "a",
+        api.globalSearch.search(
+            query = "yofukashi no uta",
             fields = listOf(
-                GlobalSearch.Fields.Anime,
-                GlobalSearch.Fields.AnimeThemes
+                Search.Fields.Anime,
+                Search.Fields.AnimeThemes
             ), animeIncludes = listOf(
                 Anime.Include.animethemes_animethemeentries_videos,
                 Anime.Include.animethemes_animethemeentries_videos_audio,
@@ -51,6 +52,14 @@ class AnimeThemesApiTest {
                 AnimeTheme.Include.anime_images,
                 AnimeTheme.Include.song_artists,
             )
+        )
+    }
+
+    @Test
+    fun videoApiCompatibleWithModels(): Unit = runBlocking {
+        api.videos.get(
+            "YofukashiNoUta-ED1.webm",
+            include = listOf(Video.Include.audio)
         )
     }
 }
