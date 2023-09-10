@@ -1,3 +1,5 @@
+rootProject.name = "Moe Player"
+
 pluginManagement {
     repositories {
         google()
@@ -5,6 +7,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -12,12 +15,12 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Moe Player"
-include ':app'
-include ':core:api'
-include ':core:data'
-include ':core:domain'
-include ':core:model'
-include ':core:ui'
-include ':features:home'
-include ':core:player'
+
+include(":app")
+include(":core:api")
+include(":core:data")
+include(":core:domain")
+include(":core:model")
+include(":core:ui")
+include(":features:home")
+include(":core:player")
